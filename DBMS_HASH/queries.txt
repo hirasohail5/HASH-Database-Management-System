@@ -1,0 +1,232 @@
+Here’s the syntax for executing queries based on the provided query_processor and process_query functions:
+
+1. CREATE Command
+Syntax:
+
+Create a database: CREATE DATABASE <database_name>
+
+Create a collection in the current database: CREATE COLLECTION <collection_name>
+
+Example:
+
+CREATE DATABASE my_database
+
+CREATE COLLECTION my_collection
+
+create index idx_name on Collection (attribute)
+
+2. USE Command
+Syntax:
+
+Use a database: USE <database_name>
+
+Example:
+
+USE my_database
+
+3. INSERT Command
+Syntax:
+
+Insert a record into a collection: INSERT INTO <collection_name> <field1>=<value1> <field2>=<value2> ...
+
+Example:
+
+INSERT INTO my_collection name=John age=30 city=NewYork
+
+4. SHOW Command
+Syntax:
+
+Show all databases: SHOW DATABASES
+
+Show all collections in the current database: SHOW COLLECTIONS
+
+Show records from a collection: SHOW <collection_name> RECORDS [SELECT <field1> <field2> ...] [WHERE <condition>] [SORTBY <field> <asc|desc>] [OFFSET <value>] [LIMIT <value>]
+
+Example:
+
+SHOW DATABASES
+
+SHOW COLLECTIONS
+
+SHOW my_collection RECORDS SELECT name age WHERE age=30 SORTBY name ASC LIMIT 10
+
+5. UPDATE Command
+Syntax:
+
+Update a record in a collection: UPDATE <collection_name> SET <field>=<value> WHERE <condition>
+
+Example:
+
+UPDATE my_collection SET age=31 WHERE name=John
+
+6. DELETE Command
+Syntax:
+
+Delete a record from a collection: DELETE FROM <collection_name> WHERE <condition>
+
+Example:
+
+DELETE FROM my_collection WHERE name=John
+
+7. RENAME Command
+Syntax:
+
+Rename a database: RENAME DATABASE <old_name> TO <new_name>
+
+Rename a collection: RENAME COLLECTION <old_name> TO <new_name>
+
+Example:
+
+RENAME DATABASE my_database TO new_database
+
+RENAME COLLECTION my_collection TO new_collection
+
+Example File: queries.txt
+I have created a file with example queries for you.
+
+pgsql
+Copy
+Edit
+# Queries for Database Management
+
+# Create a database
+CREATE DATABASE my_database
+
+# Use a database
+USE my_database
+
+# Create collections
+CREATE COLLECTION my_collection
+CREATE COLLECTION another_collection
+
+# Insert data into collections
+INSERT INTO my_collection name=John age=30 city=NewYork
+INSERT INTO my_collection name=Jane age=25 city=LosAngeles
+
+# Show databases and collections
+SHOW DATABASES
+SHOW COLLECTIONS
+SHOW my_collection RECORDS SELECT name age WHERE age=30 SORTBY name ASC LIMIT 10
+
+# Update a record
+UPDATE my_collection SET age=31 WHERE name=John
+
+# Delete a record
+DELETE FROM my_collection WHERE name=John
+
+# Rename a database or collection
+RENAME DATABASE my_database TO new_database
+RENAME COLLECTION my_collection TO new_collection
+Here's a more detailed explanation of the commands like LIMIT, OFFSET, SORTBY, and WHERE:
+
+1. LIMIT Command
+Purpose: Limits the number of records returned by a query.
+
+Syntax: LIMIT <number_of_records>
+
+Example:
+
+SHOW my_collection RECORDS LIMIT 10
+
+This will return only the first 10 records from my_collection.
+
+2. OFFSET Command
+Purpose: Skips the specified number of records before starting to return results.
+
+Syntax: OFFSET <number_of_records>
+
+Example:
+
+SHOW my_collection RECORDS OFFSET 5 LIMIT 10
+
+This will skip the first 5 records and return the next 10 records from my_collection.
+
+3. SORTBY Command
+Purpose: Sorts the results by the specified field and optionally in ascending or descending order.
+
+Syntax: SORTBY <field_name> <asc|desc>
+
+Example:
+
+SHOW my_collection RECORDS SORTBY name ASC
+
+This will sort the records in my_collection by the name field in ascending order.
+
+SHOW my_collection RECORDS SORTBY age DESC
+
+This will sort the records by age in descending order.
+
+4. WHERE Command
+Purpose: Filters the results based on specified conditions.
+
+Syntax: WHERE <field_name> = <value>
+
+Example:
+
+SHOW my_collection RECORDS WHERE age=30
+
+This will show all records where the age field is 30.
+
+SHOW my_collection RECORDS WHERE city='NewYork'
+
+This will show all records where the city field is 'NewYork'.
+
+Combined Usage Example:
+You can combine LIMIT, OFFSET, SORTBY, and WHERE in a query as follows:
+
+bash
+Copy
+Edit
+SHOW my_collection RECORDS 
+    WHERE age=30
+    SORTBY name ASC
+    OFFSET 5
+    LIMIT 10
+This query will:
+
+Filter the records where age = 30.
+
+Sort the results by the name field in ascending order.
+
+Skip the first 5 records (offset).
+
+Return the next 10 records.
+
+File Example with Full Syntax (including LIMIT, OFFSET, SORTBY, and WHERE):
+bash
+Copy
+Edit
+# Queries for Database Management with advanced options
+
+# Create a database
+CREATE DATABASE my_database
+
+# Use a database
+USE my_database
+
+# Create collections
+CREATE COLLECTION my_collection
+CREATE COLLECTION another_collection
+
+# Insert data into collections
+INSERT INTO my_collection name=John age=30 city=NewYork
+INSERT INTO my_collection name=Jane age=25 city=LosAngeles
+
+# Show databases and collections
+SHOW DATABASES
+SHOW COLLECTIONS
+
+# Show records with conditions, sorting, limiting, and offset
+SHOW my_collection RECORDS WHERE age=30 SORTBY name ASC LIMIT 10 OFFSET 5
+SHOW my_collection RECORDS WHERE city='NewYork' SORTBY age DESC LIMIT 5
+SHOW my_collection RECORDS WHERE age > 25 SORTBY name ASC OFFSET 3 LIMIT 5
+
+# Update a record
+UPDATE my_collection SET age=31 WHERE name=John
+
+# Delete a record
+DELETE FROM my_collection WHERE name=John
+
+# Rename a database or collection
+RENAME DATABASE my_database TO new_database
+RENAME COLLECTION my_collection TO new_collection
